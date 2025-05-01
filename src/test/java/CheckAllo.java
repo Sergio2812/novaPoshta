@@ -29,7 +29,7 @@ public class CheckAllo {
         driver.quit();
     }
     @Test
-    public void testAlloSearchForHairDryer(){
+    public void testAlloSearchForHairDryer() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
@@ -43,15 +43,13 @@ public class CheckAllo {
         WebElement searchButton = driver.findElement(By.xpath("//button[@class='search-form__submit-button']"));
         searchButton.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement firsProduct =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Фен Philips BHD342/10 серії 3000 ']")));
+        Thread.sleep(5000);
 
+        WebElement firsProduct =  driver.findElement(By.xpath("//div[@data-product-id='12798167']//a[contains(@class, 'product-card__title')]"));
         String productTitle = firsProduct.getText().toLowerCase();
         Assert.assertTrue(productTitle.contains("фен"), "Назва першого товару має містити слово 'фен'");
 
         driver.quit();
-
-
 
     }
 }
