@@ -73,16 +73,15 @@ public class CheckAllo {
         Thread.sleep(3000);
 
         WebElement firstProductTitle = driver.findElement(By.xpath("//div[@data-product-id='14092905']//a[@class='product-card__title']"));
-        String productName = firstProductTitle.getText();
-        Assert.assertTrue(productName.contains("AirPods 3"), "Назва має містити 'AirPods 3'");
-
-        String savedProductName = productName;
+        String expectedProductText = firstProductTitle.getText();
+        Assert.assertTrue(expectedProductText.contains("AirPods 3"), "Назва має містити 'AirPods 3'");
 
         firstProductTitle.click();
 
         WebElement productDetailTitle = driver.findElement(By.xpath("//h1[@class='p-view__header-title']"));
-        String openProductName = productDetailTitle.getText();
-        Assert.assertEquals(openProductName, savedProductName, "Назви товарів на сторінці результатів та деталях не співпадають!");
+        String actualProductText = productDetailTitle.getText();
+
+        Assert.assertEquals(expectedProductText, actualProductText, "Назви товарів на сторінці результатів та деталях не співпадають!");
 
         driver.quit();
 
