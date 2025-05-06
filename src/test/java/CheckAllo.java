@@ -1,16 +1,9 @@
-import org.apache.commons.lang3.exception.ExceptionContext;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
-import java.time.Instant;
 
 public class CheckAllo {
 
@@ -82,6 +75,41 @@ public class CheckAllo {
         String actualProductText = productDetailTitle.getText();
 
         Assert.assertEquals(expectedProductText, actualProductText, "Назви товарів на сторінці результатів та деталях не співпадають!");
+
+        driver.quit();
+
+    }
+
+   @Test
+    public void customersMenuDeliveryAndPaymentFlow() throws InterruptedException{
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        driver.get("https://allo.ua/");
+        Thread.sleep(3000);
+
+        WebElement customersButton = driver.findElement(By.xpath("//a[@class='mh-button mh-button--open']"));
+        Assert.assertTrue(customersButton.isDisplayed(),"Кнопка 'Покупцям' має бути видимою");
+
+        customersButton.click();
+        Thread.sleep(3000);
+
+        WebElement dropDownMenu = driver.findElement(By.xpath("//div[@class='mh-button__dropdown']"));
+        Assert.assertTrue(dropDownMenu.isDisplayed(),"dropDownMenu 'Покупцям' має бути відкритим");
+
+        WebElement deliveryOption = driver.findElement(By.xpath("//div[contains(@class, 'mh-button__dropdown')]//a[contains(@href, 'shipment_payment')]"));
+        Assert.assertTrue(deliveryOption.isDisplayed(),"'Доставка і оплата' має бути видимою");
+
+        deliveryOption.click();
+        Thread.sleep(3000);
+
+        WebElement pageTitleElement = driver.findElement(By.xpath("//h2[@class='sp-page-title sp-h2 page-header']"));
+        String actualTitleText = pageTitleElement.getText();
+        Assert.assertTrue(actualTitleText.contains("Доставка і оплата"),"Заголовок сторінки має містити 'Доставка і оплата'");
+
+        WebElement howToPlaceAnOrder = driver.findElement(By.xpath("//div[@id='Buy']//h3[@class='sub-block-header']"));
+        Assert.assertTrue(howToPlaceAnOrder.isDisplayed(), " елемент 'Як оформити замовлення?' видимий на сторінці");
+        Assert.assertEquals(howToPlaceAnOrder.getText(), "Як оформити замовлення?", "Текст заголовку має співпадати");
 
         driver.quit();
 
