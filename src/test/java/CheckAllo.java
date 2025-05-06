@@ -79,6 +79,7 @@ public class CheckAllo {
         driver.quit();
 
     }
+
    @Test
     public void customersMenuDeliveryAndPaymentFlow() throws InterruptedException{
         WebDriver driver = new ChromeDriver();
@@ -93,11 +94,10 @@ public class CheckAllo {
         customersButton.click();
         Thread.sleep(3000);
 
-
         WebElement dropDownMenu = driver.findElement(By.xpath("//div[@class='mh-button__dropdown']"));
         Assert.assertTrue(dropDownMenu.isDisplayed(),"dropDownMenu 'Покупцям' має бути відкритим");
 
-        WebElement deliveryOption = dropDownMenu.findElement(By.xpath("//div[contains(@class, 'mh-button__dropdown')]//a[contains(@href, 'shipment_payment')]"));
+        WebElement deliveryOption = driver.findElement(By.xpath("//div[contains(@class, 'mh-button__dropdown')]//a[contains(@href, 'shipment_payment')]"));
         Assert.assertTrue(deliveryOption.isDisplayed(),"'Доставка і оплата' має бути видимою");
 
         deliveryOption.click();
