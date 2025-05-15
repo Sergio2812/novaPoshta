@@ -1,10 +1,8 @@
 package pages;
 
 import bassesClass.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
 
@@ -25,8 +23,8 @@ public class HomePage extends BasePage {
     }
 
     public WebElement searchField(){
-        return visibilityOfElementByXpatch(SEARCH_FIELD);
 
+        return visibilityOfElementByXpatch(SEARCH_FIELD);
     }
 
     public WebElement catalogButton(){

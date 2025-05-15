@@ -1,8 +1,6 @@
 package tests;
 
 import bassesClass.TestInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.DeliveryAndPaymentPage;
@@ -69,7 +67,7 @@ public class CheckAllo extends TestInit {
     }
 
     @Test
-    public void customersMenuDeliveryAndPaymentFlow() throws InterruptedException {
+    public void customersMenuDeliveryAndPaymentFlow() {
         HomePage homePage = new HomePage(driver);
         DeliveryAndPaymentPage deliveryAndPaymentPage = new DeliveryAndPaymentPage(driver);
 
@@ -88,15 +86,15 @@ public class CheckAllo extends TestInit {
 
         homePage.buttonDeliveryOptionsDisplayed().click();
 
-        deliveryAndPaymentPage.getDeliveryPaymentTitle().getText();
-        Assert.assertTrue(deliveryAndPaymentPage.getDeliveryPaymentTitle().getText().contains("Доставка і оплата"));
+        String deliveryTytle = deliveryAndPaymentPage.getDeliveryPaymentTitle().getText();
+        Assert.assertTrue(deliveryTytle.contains("Доставка і оплата"));
 
         deliveryAndPaymentPage.howToPlaceAnOrderHeader().isDisplayed();
         Assert.assertTrue(deliveryAndPaymentPage.howToPlaceAnOrderHeader().isDisplayed());
 
-        String howToPlaceAnOrderHeader = deliveryAndPaymentPage.howToPlaceAnOrderHeader().getText();
+        String howToOrder = deliveryAndPaymentPage.howToPlaceAnOrderHeader().getText();
 
-        Assert.assertEquals(deliveryAndPaymentPage.howToPlaceAnOrderHeader().getText(), "Як оформити замовлення?");
+        Assert.assertEquals(howToOrder, "Як оформити замовлення?");
 
     }
 }

@@ -15,15 +15,17 @@ public class TestInit {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+
     }
 
     @AfterMethod
-    public void closeBrowse(){
+    public void closeBrowser(){
         driver.quit();
+
     }
 
     public void openUrl(String url){
-
         driver.get(url);
+
     }
 }
