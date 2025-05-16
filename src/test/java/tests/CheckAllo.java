@@ -1,6 +1,7 @@
 package tests;
 
 import bassesClass.TestInit;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.DeliveryAndPaymentPage;
@@ -20,7 +21,6 @@ public class CheckAllo extends TestInit {
         openUrl(alloUrl);
 
         Assert.assertTrue(homePage.allologo().isDisplayed());
-
     }
 
     @Test
@@ -36,8 +36,7 @@ public class CheckAllo extends TestInit {
         homePage.searchField().sendKeys("Фен");
         homePage.searchButton().click();
 
-        Assert.assertTrue(searchResultPage.firstProduct().getText().contains("Фен"));
-
+        Assert.assertTrue("Фен".contains(searchResultPage.firstProduct().getText()));
     }
 
     @Test
@@ -63,7 +62,6 @@ public class CheckAllo extends TestInit {
         String actualNameAirPods = productPage.getNameProductTitle();
 
         Assert.assertEquals(actualNameAirPods, expectedNameFirstAirPods);
-
     }
 
     @Test
@@ -95,6 +93,29 @@ public class CheckAllo extends TestInit {
         String howToOrder = deliveryAndPaymentPage.howToPlaceAnOrderHeader().getText();
 
         Assert.assertEquals(howToOrder, "Як оформити замовлення?");
+    }
 
+    @Test
+    public void checkResultSearchField() {
+
+        HomePage homePage = new HomePage(driver);
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver);
+
+        String samsungTV = "Телевізор Samsung";
+
+        openUrl(alloUrl);
+
+        homePage.enterValueInSearchField(samsungTV);
+        homePage.clickSearchButton();
+
+        searchResultsPage.viewModeButtonDispleyed();
+
+        for (WebElement element : searchResultsPage.numbersCommentsProduct()) {
+            String numbersCommentsProduct = element.getText();
+            int number = Integer.parseInt(numbersCommentsProduct);
+            if (number > 27) {
+                System.out.println(number);
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
 
@@ -19,6 +20,11 @@ public class BasePage {
     }
 
     public WebElement visibilityOfElementByXpatch (String locator){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+       return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+    }
+
+    public List<WebElement> visibilityOfElementsLocatorByXpatch(String locator){
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(locator)));
+        return driver.findElements(By.xpath(locator));
     }
 }

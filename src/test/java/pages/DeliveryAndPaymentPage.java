@@ -19,6 +19,5 @@ public class DeliveryAndPaymentPage extends BasePage {
     public WebElement howToPlaceAnOrderHeader(){
 
         return visibilityOfElementByXpatch(HOW_TO_PLACE_AN_ORDER_HEDER);
-
     }
 }

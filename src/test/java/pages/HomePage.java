@@ -23,7 +23,6 @@ public class HomePage extends BasePage {
     }
 
     public WebElement searchField(){
-
         return visibilityOfElementByXpatch(SEARCH_FIELD);
     }
 
